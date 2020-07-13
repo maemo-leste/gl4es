@@ -1,0 +1,27 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 76fbf16..d471506 100755
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -10,6 +10,7 @@ link_directories(${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
+ 
+ option(PANDORA "Set to ON if targeting an OpenPandora device" ${PANDORA})
+ option(PYRA "Set to ON if targeting an Dragonbox Pyra device" ${PYRA})
++option(DROID4 "Set to ON if targeting a Motorola Droid4 device" ${DROID4})
+ option(BCMHOST "Set to ON if targeting an RPi(2) device" ${BCMHOST})
+ option(ODROID "Set to ON if targeting an ODroid device" ${ODROID})
+ option(CHIP "Set to ON if targeting an C.H.I.P. device" ${CHIP})
+@@ -58,6 +59,14 @@ if(PYRA)
+     set(NO_GBM ON)
+ endif()
+ 
++# Droid4
++if(DROID4)
++    add_definitions(-DPYRA)
++    add_definitions(-mcpu=cortex-a8 -mfpu=neon -mfloat-abi=hard -ftree-vectorize -fsingle-precision-constant -ffast-math)
++    set(NO_GBM ON)
++    set(DEFAULT_ES 2)
++endif()
++
+ # Raspberry PI
+ if(BCMHOST)
+     include_directories(/opt/vc/include /opt/vc/include/interface/vcos/pthreads /opt/vc/include/interface/vmcs_host/linux)

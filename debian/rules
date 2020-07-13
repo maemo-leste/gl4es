@@ -1,0 +1,18 @@
+#!/usr/bin/make -f
+
+GLVN_VERS := $(shell apt-cache show --no-all-versions libglvnd0 | grep '^Version:' | sed 's/.*: //')
+SUBSTVARS := -Vlibglvnd0:Version="$(GLVN_VERS)"
+
+%:
+	dh $@
+
+override_dh_gencontrol:
+	dh_gencontrol -- $(SUBSTVARS)
+
+override_dh_auto_configure:
+	dh_auto_configure -- \
+		-DDROID4=1 \
+		-DCMAKE_BUILD_TYPE=RelWithDebInfo
+
+override_dh_auto_test:
+	@echo "Skipping dh_auto_test"

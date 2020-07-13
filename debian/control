@@ -1,0 +1,21 @@
+Source: gl4es
+Priority: optional
+Section: droid4
+Maintainer: Ivan J. <parazyd@dyne.org>
+Standards-Version: 4.2.1
+Build-Depends:
+ debhelper (>= 10),
+ cmake,
+ libx11-dev,
+Homepage: https://github.com/ptitSeb/gl4es
+
+Package: gl4es
+Architecture: armhf
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Provides: libgl1 (= ${libglvnd0:Version})
+Conflicts: libgl1 (>= ${libglvnd0:Version})
+Replaces: libgl1 (>= ${libglvnd0:Version})
+Description:  GL4ES is a OpenGL 2.1/1.5 to GL ES 2.0/1.1 translation library
+  GL4ES is a OpenGL 2.1/1.5 to GL ES 2.0/1.1 translation library,
+  with support for Pandora, ODroid, OrangePI, CHIP, Raspberry PI,
+  Android, Emscripten and AmigaOS4.
